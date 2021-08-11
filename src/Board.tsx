@@ -40,7 +40,7 @@ class Board extends React.Component<IPos, IState> {
     }
 
     return (
-      <div>
+      <div className='board'>
         <table className="table">
           {rows}
         </table>

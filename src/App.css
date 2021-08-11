@@ -1,49 +1,99 @@
 .App {
-  font-family: sans-serif;
-  text-align: center;
+    font-family: sans-serif;
+    text-align: center;
+
+    width: 800px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.table {
-  width: 500px;
-  height: 500px;
-  margin-left: auto;
-  margin-right: auto;
+.board .table {
+    width: 500px;
+    height: 500px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.table tr {
+.board .table tr {
 }
 
-.table td {
-  width: 50px;
-  height: 50px;
-  background-color: #ddd;
-  text-align: center;
-  cursor: pointer;
-  padding: 5px;
-  overflow:hidden;
-  font-size: 30px;
+.board .table td {
+    width: 50px;
+    height: 50px;
+    background-color: #ddd;
+    text-align: center;
+    cursor: pointer;
+    padding: 5px;
+    overflow: hidden;
+    font-size: 30px;
 }
 
-.history {
-  float: left;
+.histories .list {
+    margin: auto;
+    box-sizing: border-box;
+    overflow: auto;
+    width: 800px;
 }
 
-div.history table {
-  width: 250px;
-  height: 250px;
-  margin: 0 15px;
+.histories .list .item {
+    box-sizing: border-box;
+    float: left;
+    margin: 7px;
+    width: 250px;
+    height: 300px;
 }
 
-div.history table tr {
+.histories .list .item h3 {
+    margin: 5px;
 }
 
-div.history table tr td {
-  width: 25px;
-  height: 25px;
-  background-color: #ddd;
-  text-align: center;
-  cursor: pointer;
-  padding: 3px;
-  overflow:hidden;
-  font-size: 15px;
+.histories .list .item table {
+    width: 250px;
+    height: 250px;
+    margin: auto;
+}
+
+.histories .list .item table tr {
+}
+
+.histories .list .item table tr td {
+    width: 16px;
+    height: 16px;
+    background-color: #ddd;
+    text-align: center;
+    padding: 3px;
+    font-size: 13px;
+}
+
+.information {
+    width: 500px;
+    margin: 15px auto;
+}
+
+.information .stats {
+    width: 350px;
+    margin: auto;
+    overflow: hidden;
+    font-size: 35px;
+}
+
+.information .stats .score {
+    float: left;
+    margin: 20px;
+    width: 130px;
+    height: 70px;
+    box-sizing: border-box;
+    border-style: dashed;
+}
+
+.information .stats .score .count {
+    margin: 5px 0;
+}
+
+.inactive {
+    border: white;
+}
+
+.active {
+    border: red;
 }

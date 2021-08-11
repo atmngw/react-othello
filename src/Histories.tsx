@@ -38,16 +38,16 @@ const Histories: React.FC<IPos> = (props: any) => {
   const count = histories.length - parseInt(idx) - 1;
 
     histories_tables.push(
-      <div className="history">
+      <div className="item">
         <h3>{title(count, histories[idx].color)}</h3>
-        <table className="history" key={idx}>{rows}</table>
+        <table className="square" key={idx}>{rows}</table>
       </div>)
   }
 
   return (
-    <div>
+    <div className="histories">
       <h2>Histories</h2>
-      <div className="histories">
+      <div className="list">
         {histories_tables}
       </div>
     </div>
