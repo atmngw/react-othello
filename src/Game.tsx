@@ -4,6 +4,7 @@ import Board from "./Board";
 import Stone from "./Stone";
 import {flip} from "./Rule";
 import Histories from "./Histories";
+import Information from "./Information";
 
 interface IState {
   histories: any[];
@@ -91,7 +92,12 @@ class Game extends React.Component<{}, IState> {
 
     flipped_squares[position] = this.getCurrentlyColor();
     this.setState({squares: flipped_squares});
-    this.setState({histories: this.state.histories.concat([{squares: flipped_squares, color: this.getCurrentlyColor()}])});
+    this.setState({
+      histories: this.state.histories.concat([{
+        squares: flipped_squares,
+        color: this.getCurrentlyColor()
+      }])
+    });
 
     this.changeTurn();
   }
@@ -99,14 +105,19 @@ class Game extends React.Component<{}, IState> {
   render() {
     return (
       <div>
+        <Information
+          currently_color={this.state.currently_color}
+          squares={this.state.squares.slice()}
+        />
+
         <Board
-          squares={this.state.squares}
+          squares={this.state.squares.slice()}
           currently_color={this.state.currently_color}
           histories={this.state.histories}
           squareClick={this.squareClick}
         />
 
-      <Histories histories={this.state.histories} />
+        <Histories histories={this.state.histories}/>
       </div>
     );
   }
