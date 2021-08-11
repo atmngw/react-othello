@@ -14,14 +14,15 @@ export function flip(currently_color: number, putPosition: number, diff: number,
   let flipped_count = 0;
 
 
-  let row: number;
+  let base_row: number;
+  let check_row: number;
   let left = 0
   let right = 63
 
-  const put_row = (Math.floor(putPosition / 8) + 1)
   let check_position: number = putPosition;
 
   while (true) {
+    base_row = (Math.floor(check_position / 8) + 1)
     check_position += diff;
 
     // ボード上に存在しない座標なら終了
@@ -30,20 +31,20 @@ export function flip(currently_color: number, putPosition: number, diff: number,
     }
 
     // 検査対象行の両端を算出
-    row = (Math.floor(check_position / 8) + 1)
+    check_row = (Math.floor(check_position / 8) + 1)
 
-    // -9/-8/-7/7/8/9は設置行と検査行が同一の場合SKIPさせる
+    // 真横以外の検査では設置行と検査行が隣接している場合のみ許容する
     if ([-9, -8, -7, 7, 8, 9].includes(diff)) {
-      if (put_row === row) break;
+      if (Math.abs(base_row - check_row) !== 1) break;
     }
 
-    // -1/1は設置行と検査行が違う場合SKIPさせる
+    // -1/1は設置行と検査行が同じ場合のみ許容する
     if ([-1, 1].includes(diff)) {
-      if (put_row !== row) break;
+      if (base_row !== check_row) break;
     }
 
-    right = row * 8 - 1
-    left = (row - 1) * 8
+    right = check_row * 8 - 1
+    left = (check_row - 1) * 8
 
     // 両端の超えていたら終了
     if (check_position < left || check_position > right) {
