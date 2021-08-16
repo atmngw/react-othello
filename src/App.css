@@ -97,3 +97,14 @@
 .active {
     border: red;
 }
+
+.pass-button {
+    margin: 20px 0 30px
+}
+
+.pass-button button {
+    width: 150px;
+    height: 50px;
+    font-size: 25px;
+    font-weight: bold;
+}

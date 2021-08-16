@@ -27,7 +27,6 @@ class Board extends React.Component<IPos, IState> {
   }
 
   render() {
-    console.log(this.props.currently_color === Stone.BLACK ? 'Black' : 'White');
     let rows = []
     for (let row = 1; row <= 8; row++) {
       let cols = []
