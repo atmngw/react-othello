@@ -2,7 +2,8 @@ import React from "react";
 
 import Board from "./Board";
 import Stone from "./Stone";
-import {flip} from "./Rule";
+import Pass from './Pass';
+import {flip, canPut} from "./Rule";
 import Histories from "./Histories";
 import Information from "./Information";
 
@@ -74,7 +75,6 @@ class Game extends React.Component<{}, IState> {
 
   changeTurn = (): void => {
     const next_color = this.state.currently_color === Stone.BLACK ? Stone.WHITE : Stone.BLACK;
-    console.log('next color:' + next_color)
     this.setState({currently_color: next_color})
   }
 
@@ -102,12 +102,21 @@ class Game extends React.Component<{}, IState> {
     this.changeTurn();
   }
 
+  possibleToPass = (): boolean => {
+    return !canPut(this.state.squares.slice(), this.state.currently_color);
+  }
+
   render() {
     return (
       <div>
         <Information
           currently_color={this.state.currently_color}
           squares={this.state.squares.slice()}
+        />
+
+        <Pass
+          possibleToPass={this.possibleToPass()}
+          pass={this.changeTurn}
         />
 
         <Board

@@ -73,6 +73,32 @@ export function flip(currently_color: number, putPosition: number, diff: number,
 }
 
 /**
+ * 配置可能か検査
+ * @param squares
+ * @param currently_color
+ * @return boolean
+ */
+export function canPut(squares: (number | null)[], currently_color: number): boolean {
+  const checkCanPut = function (value: number | null, position: number): boolean {
+    if (squares[position] === null) {
+      // 全方向への設置
+      const diff_list = [-9, -8, -7, 1, 9, 8, 7, -1];
+      for (let i = 0; i < diff_list.length; i++) {
+        const diff = diff_list[i];
+        const flipped_squares: (number | null)[] = flip(currently_color, position, diff, squares);
+        if (flipped_squares.toString() !== squares.toString()) {
+          return true;
+        }
+      }
+    }
+
+    return false;
+  }
+
+  return squares.some(checkCanPut);
+}
+
+/**
  * 盤面の位置番号を取得
  *
  * @param row
