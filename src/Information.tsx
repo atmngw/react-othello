@@ -1,16 +1,18 @@
 import React from "react";
-import Stone from './Stone';
+import Stone, {TColor} from './Stone';
+import {TSquare, TSquares} from './Square';
 
 interface IPos {
   currently_color: number;
-  squares: (number | null)[];
+  squares: TSquares;
 }
 
+type TCount = number;
 
 const Information: React.FC<IPos> = (props: any) => {
 
-  const countColor = (color: number): number => {
-    return props.squares.filter((value: null|number) => value !== null && value === color).length;
+  const countColor = (color: TColor): TCount => {
+    return props.squares.filter((value: TSquare) => value === color).length;
   }
 
   return (

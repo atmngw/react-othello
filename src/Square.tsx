@@ -1,22 +1,19 @@
 import React from 'react';
-
-import Stone from './Stone';
+import Stone, {TColor, TDisplayColor} from './Stone';
+import {TPosition} from './Board';
 
 interface IState {
 }
 
 interface IPos {
-  position: number;
-  value: (null | number);
+  position: TPosition;
+  value: TColor;
   onClick: () => void;
 }
 
-class Square extends React.Component<IPos, IState> {
-  getStoneValue(): string|null {
-    if (this.props.value !== null) {
-      return Stone.toDisplay(this.props.value);
-    }
-    return null;
+export class Square extends React.Component<IPos, IState> {
+  getStoneValue(): TDisplayColor {
+    return Stone.toDisplay(this.props.value);
   }
 
   render() {
@@ -30,4 +27,5 @@ class Square extends React.Component<IPos, IState> {
   }
 }
 
-export default Square;
+export type TSquare = number;
+export type TSquares = TSquare[];

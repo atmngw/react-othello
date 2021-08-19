@@ -1,6 +1,6 @@
-import Square from "./Square";
+import {Square} from "./Square";
 import React from "react";
-import Stone from './Stone';
+import Stone, {TColor} from './Stone';
 import {getPosition} from './Rule';
 
 interface IPos {
@@ -25,7 +25,7 @@ const Histories: React.FC<IPos> = (props: any) => {
       rows.push(<tr className="line" key={row} data-row={row}>{cols}</tr>)
     }
 
-    const title = (count: number, color: number): string => {
+    const title = (count: number, color: TColor): string => {
       const is_initial = count === 0;
 
       const title = is_initial ? '開始' : `第${count}手`;

@@ -1,23 +1,23 @@
 import React from "react";
-
-import Board from "./Board";
-import Stone from "./Stone";
+import Board, {TPosition} from "./Board";
+import Stone, {TColor} from "./Stone";
 import Pass from './Pass';
 import {flip, canPut} from "./Rule";
 import Histories from "./Histories";
 import Information from "./Information";
+import {TSquares} from './Square';
 
 interface IState {
   histories: any[];
   currently_color: number;
-  squares: (number | null)[];
+  squares: TSquares;
 }
 
 class Game extends React.Component<{}, IState> {
   constructor(props: any) {
     super(props);
 
-    const squares: (number | null)[] = Array(64).fill(null)
+    const squares: TSquares = Array(64).fill(Stone.EMPTY)
 
     // 初期配置
     squares[27] = Stone.WHITE
@@ -32,12 +32,12 @@ class Game extends React.Component<{}, IState> {
     };
   }
 
-  flipStone = (position: number): (number | null)[] => {
+  flipStone = (position: TPosition): TSquares => {
     // 反転した石の設置箇所
-    let flipped_squares: (number | null)[] = this.state.squares.slice();
+    let flipped_squares: TSquares = this.state.squares.slice();
 
     // 現在石があるか
-    if (this.state.squares[position] !== null) {
+    if (this.state.squares[position] !== Stone.EMPTY) {
       return flipped_squares;
     }
 
@@ -69,8 +69,8 @@ class Game extends React.Component<{}, IState> {
     return flipped_squares;
   }
 
-  isEmpty = (position: number): Boolean => {
-    return this.state.squares[position] === null;
+  isEmpty = (position: TPosition): Boolean => {
+    return this.state.squares[position] === Stone.EMPTY;
   }
 
   changeTurn = (): void => {
@@ -78,11 +78,11 @@ class Game extends React.Component<{}, IState> {
     this.setState({currently_color: next_color})
   }
 
-  getCurrentlyColor = (): number => {
+  getCurrentlyColor = (): TColor => {
     return this.state.currently_color;
   }
 
-  squareClick = (position: number) => {
+  squareClick = (position: TPosition) => {
     if (!this.isEmpty(position)) return;
 
     let flipped_squares = this.flipStone(position);
