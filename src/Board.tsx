@@ -1,11 +1,10 @@
-import Stone from './Stone'
 import React from "react";
-import Square from "./Square";
+import {Square, TSquares} from "./Square";
 import {getPosition} from './Rule';
 
 interface IPos {
   currently_color: number;
-  squares: (number | null)[];
+  squares: TSquares;
   histories: any[];
   squareClick: (position: number) => void;
 }
@@ -48,4 +47,7 @@ class Board extends React.Component<IPos, IState> {
   }
 }
 
+export type TPosition = number;
+export type TRow = number;
+export type TCol = number;
 export default Board;
