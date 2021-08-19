@@ -9,7 +9,7 @@ interface IPos {
 
 const Histories: React.FC<IPos> = (props: any) => {
   let histories_tables = []
-  const histories = props.histories.slice(0, -1).reverse();
+  const histories = props.histories.slice().reverse();
 
   for (let idx in histories) {
     let rows = []
