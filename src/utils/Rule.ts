@@ -1,5 +1,5 @@
 import {TSquares} from "components/Square";
-import Stone, {TColor} from 'components/Stone';
+import {Stone, TColor} from 'components/Stone';
 import {TPosition, TCol, TRow} from "components/Board";
 
 /**

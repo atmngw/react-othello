@@ -1,9 +1,8 @@
 import React from 'react';
-import Stone, {TColor, TDisplayColor} from 'components/Stone';
+import {Stone, TColor, TDisplayColor} from 'components/Stone';
 import {TPosition} from 'components/Board';
 
-type State = {
-}
+type State = {}
 
 type Props = {
   position: TPosition;

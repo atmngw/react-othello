@@ -1,5 +1,5 @@
 import React from 'react';
-import Stone, {TColor} from 'components/Stone';
+import {Stone, TColor} from 'components/Stone';
 import {TSquare, TSquares} from 'components/Square';
 
 type Props = {
@@ -9,7 +9,7 @@ type Props = {
 
 type TCount = number;
 
-const Information: React.FC<Props> = (props: any) => {
+export const Information: React.FC<Props> = (props: any) => {
 
   const countColor = (color: TColor): TCount => {
     return props.squares.filter((value: TSquare) => value === color).length;
@@ -33,5 +33,3 @@ const Information: React.FC<Props> = (props: any) => {
     </div>
   );
 }
-
-export default Information

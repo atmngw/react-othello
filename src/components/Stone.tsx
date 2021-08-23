@@ -1,4 +1,4 @@
-export default class Stone {
+export class Stone {
   static readonly EMPTY = 0;
   static readonly BLACK = 1;
   static readonly WHITE = 2;

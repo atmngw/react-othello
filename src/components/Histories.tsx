@@ -1,13 +1,13 @@
 import React from 'react';
 import {Square} from 'components/Square';
-import Stone, {TColor} from 'components/Stone';
+import {Stone, TColor} from 'components/Stone';
 import {getPosition} from 'utils/Rule';
 
 type Props = {
   histories: any[];
 }
 
-const Histories: React.FC<Props> = (props: any) => {
+export const Histories: React.FC<Props> = (props: any) => {
   let histories_tables = []
   const histories = props.histories.slice().reverse();
 
@@ -34,7 +34,7 @@ const Histories: React.FC<Props> = (props: any) => {
       return title + stone_color;
     }
 
-  const count = histories.length - parseInt(idx) - 1;
+    const count = histories.length - parseInt(idx) - 1;
 
     histories_tables.push(
       <div className="item">
@@ -52,5 +52,3 @@ const Histories: React.FC<Props> = (props: any) => {
     </div>
   );
 }
-
-export default Histories;

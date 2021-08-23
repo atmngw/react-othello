@@ -9,10 +9,9 @@ type Props = {
   squareClick: (position: number) => void;
 }
 
-type State = {
-}
+type State = {}
 
-class Board extends React.Component<Props, State> {
+export class Board extends React.Component<Props, State> {
   renderSquare(position: number): any {
     const squares = this.props.squares.slice();
 
@@ -50,4 +49,3 @@ class Board extends React.Component<Props, State> {
 export type TPosition = number;
 export type TRow = number;
 export type TCol = number;
-export default Board;

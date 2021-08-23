@@ -1,14 +1,13 @@
 import React from 'react';
-import Board, {TPosition} from 'components/Board';
-import Stone, {TColor} from 'components/Stone';
-import Pass from 'components/Pass';
+import {Board, TPosition} from 'components/Board';
+import {Stone, TColor} from 'components/Stone';
+import {Pass} from 'components/Pass';
 import {flip, canPut} from 'utils/Rule';
-import Histories from 'components/Histories';
-import Information from 'components/Information';
+import {Histories} from 'components/Histories';
+import {Information} from 'components/Information';
 import {TSquares} from 'components/Square';
 
-type Props = {
-}
+type Props = {}
 
 type State = {
   histories: any[];
@@ -16,7 +15,7 @@ type State = {
   squares: TSquares;
 }
 
-class Game extends React.Component<Props, State> {
+export class Game extends React.Component<Props, State> {
   constructor(props: any) {
     super(props);
 
@@ -134,5 +133,3 @@ class Game extends React.Component<Props, State> {
     );
   }
 }
-
-export default Game;
