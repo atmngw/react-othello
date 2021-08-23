@@ -7,7 +7,7 @@ type Props = {
   histories: any[];
 }
 
-export const Histories: React.FC<Props> = (props: any) => {
+export const Histories = (props: Props) => {
   let histories_tables = []
   const histories = props.histories.slice().reverse();
 
