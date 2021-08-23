@@ -1,6 +1,6 @@
-import {TSquares} from "components/Square";
-import {Stone, TColor} from 'components/Stone';
-import {TPosition, TCol, TRow} from "components/Board";
+import {Squares} from "components/Square";
+import {Stone, Color} from 'components/Stone';
+import {Position, Col, Row} from "components/Board";
 
 /**
  * 石の反転処理
@@ -12,9 +12,9 @@ import {TPosition, TCol, TRow} from "components/Board";
  *
  * @return [] 変更後の配置または、反転不可の場合は変更前の配列を返却
  */
-export function flip(currently_color: TColor, putPosition: TPosition, diff: number, squares: TSquares): TSquares {
-  const before_squares: TSquares = squares.slice();
-  let after_squares: TSquares = squares.slice();
+export function flip(currently_color: Color, putPosition: Position, diff: number, squares: Squares): Squares {
+  const before_squares: Squares = squares.slice();
+  let after_squares: Squares = squares.slice();
   let flipped_count = 0;
 
 
@@ -23,7 +23,7 @@ export function flip(currently_color: TColor, putPosition: TPosition, diff: numb
   let left = 0
   let right = 63
 
-  let check_position: TPosition = putPosition;
+  let check_position: Position = putPosition;
 
   while (true) {
     base_row = (Math.floor(check_position / 8) + 1)
@@ -82,14 +82,14 @@ export function flip(currently_color: TColor, putPosition: TPosition, diff: numb
  * @param currently_color
  * @return boolean
  */
-export function canPut(squares: TSquares, currently_color: TColor): boolean {
-  const checkCanPut = function (value: number, position: TPosition): boolean {
+export function canPut(squares: Squares, currently_color: Color): boolean {
+  const checkCanPut = function (value: number, position: Position): boolean {
     if (squares[position] === Stone.EMPTY) {
       // 全方向への設置
       const diff_list = [-9, -8, -7, 1, 9, 8, 7, -1];
       for (let i = 0; i < diff_list.length; i++) {
         const diff = diff_list[i];
-        const flipped_squares: TSquares = flip(currently_color, position, diff, squares);
+        const flipped_squares: Squares = flip(currently_color, position, diff, squares);
         if (flipped_squares.toString() !== squares.toString()) {
           return true;
         }
@@ -108,7 +108,7 @@ export function canPut(squares: TSquares, currently_color: TColor): boolean {
  * @param row
  * @param col
  */
-export function getPosition(row: TRow, col: TCol): TPosition {
+export function getPosition(row: Row, col: Col): Position {
   // 0から63までの位置を算出
   return (row - 1) * 8 + col - 1;
 }

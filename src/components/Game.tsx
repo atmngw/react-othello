@@ -1,25 +1,25 @@
 import React from 'react';
-import {Board, TPosition} from 'components/Board';
-import {Stone, TColor} from 'components/Stone';
+import {Board, Position} from 'components/Board';
+import {Stone, Color} from 'components/Stone';
 import {Pass} from 'components/Pass';
-import {flip, canPut} from 'utils/Rule';
 import {Histories} from 'components/Histories';
 import {Information} from 'components/Information';
-import {TSquares} from 'components/Square';
+import {Squares} from 'components/Square';
+import {flip, canPut} from 'utils/Rule';
 
 type Props = {}
 
 type State = {
   histories: any[];
   currently_color: number;
-  squares: TSquares;
+  squares: Squares;
 }
 
 export class Game extends React.Component<Props, State> {
   constructor(props: any) {
     super(props);
 
-    const squares: TSquares = Array(64).fill(Stone.EMPTY)
+    const squares: Squares = Array(64).fill(Stone.EMPTY)
 
     // 初期配置
     squares[27] = Stone.WHITE
@@ -34,9 +34,9 @@ export class Game extends React.Component<Props, State> {
     };
   }
 
-  flipStone = (position: TPosition): TSquares => {
+  flipStone = (position: Position): Squares => {
     // 反転した石の設置箇所
-    let flipped_squares: TSquares = this.state.squares.slice();
+    let flipped_squares: Squares = this.state.squares.slice();
 
     // 現在石があるか
     if (this.state.squares[position] !== Stone.EMPTY) {
@@ -71,7 +71,7 @@ export class Game extends React.Component<Props, State> {
     return flipped_squares;
   }
 
-  isEmpty = (position: TPosition): Boolean => {
+  isEmpty = (position: Position): Boolean => {
     return this.state.squares[position] === Stone.EMPTY;
   }
 
@@ -80,11 +80,11 @@ export class Game extends React.Component<Props, State> {
     this.setState({currently_color: next_color})
   }
 
-  getCurrentlyColor = (): TColor => {
+  getCurrentlyColor = (): Color => {
     return this.state.currently_color;
   }
 
-  squareClick = (position: TPosition) => {
+  squareClick = (position: Position) => {
     if (!this.isEmpty(position)) return;
 
     let flipped_squares = this.flipStone(position);

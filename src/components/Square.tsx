@@ -1,17 +1,17 @@
 import React from 'react';
-import {Stone, TColor, TDisplayColor} from 'components/Stone';
-import {TPosition} from 'components/Board';
+import {Stone, Color, DisplayColor} from 'components/Stone';
+import {Position} from 'components/Board';
 
 type State = {}
 
 type Props = {
-  position: TPosition;
-  value: TColor;
+  position: Position;
+  value: Color;
   onClick: () => void;
 }
 
 export class Square extends React.Component<Props, State> {
-  getStoneValue(): TDisplayColor {
+  getStoneValue(): DisplayColor {
     return Stone.toDisplay(this.props.value);
   }
 
@@ -26,5 +26,4 @@ export class Square extends React.Component<Props, State> {
   }
 }
 
-export type TSquare = number;
-export type TSquares = TSquare[];
+export type Squares = Color[];

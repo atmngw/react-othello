@@ -1,18 +1,18 @@
 import React from 'react';
-import {Stone, TColor} from 'components/Stone';
-import {TSquare, TSquares} from 'components/Square';
+import {Stone, Color} from 'components/Stone';
+import {Squares} from 'components/Square';
 
 type Props = {
   currently_color: number;
-  squares: TSquares;
+  squares: Squares;
 }
 
 type TCount = number;
 
 export const Information: React.FC<Props> = (props: any) => {
 
-  const countColor = (color: TColor): TCount => {
-    return props.squares.filter((value: TSquare) => value === color).length;
+  const countColor = (color: Color): TCount => {
+    return props.squares.filter((value: Color) => value === color).length;
   }
 
   return (

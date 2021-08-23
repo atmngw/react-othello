@@ -1,6 +1,6 @@
 import React from 'react';
 import {Square} from 'components/Square';
-import {Stone, TColor} from 'components/Stone';
+import {Stone, Color} from 'components/Stone';
 import {getPosition} from 'utils/Rule';
 
 type Props = {
@@ -25,7 +25,7 @@ export const Histories: React.FC<Props> = (props: any) => {
       rows.push(<tr className="line" key={row} data-row={row}>{cols}</tr>)
     }
 
-    const title = (count: number, color: TColor): string => {
+    const title = (count: number, color: Color): string => {
       const is_initial = count === 0;
 
       const title = is_initial ? '開始' : `第${count}手`;

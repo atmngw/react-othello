@@ -3,12 +3,12 @@ export class Stone {
   static readonly BLACK = 1;
   static readonly WHITE = 2;
 
-  static toDisplay = (color: TColor): TDisplayColor => {
+  static toDisplay = (color: Color): DisplayColor => {
     if (color === Stone.BLACK) return '●';
     if (color === Stone.WHITE) return '◯';
     return '';
   }
 }
 
-export type TColor = number;
-export type TDisplayColor = string;
+export type Color = number;
+export type DisplayColor = string;

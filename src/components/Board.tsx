@@ -1,10 +1,10 @@
 import React from 'react';
-import {Square, TSquares} from 'components/Square';
+import {Square, Squares} from 'components/Square';
 import {getPosition} from 'utils/Rule';
 
 type Props = {
   currently_color: number;
-  squares: TSquares;
+  squares: Squares;
   histories: any[];
   squareClick: (position: number) => void;
 }
@@ -46,6 +46,6 @@ export class Board extends React.Component<Props, State> {
   }
 }
 
-export type TPosition = number;
-export type TRow = number;
-export type TCol = number;
+export type Position = number;
+export type Row = number;
+export type Col = number;
