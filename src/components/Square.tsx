@@ -10,20 +10,18 @@ type Props = {
   onClick: () => void;
 }
 
-export class Square extends React.Component<Props, State> {
-  getStoneValue(): DisplayColor {
-    return Stone.toDisplay(this.props.value);
+export const Square = (props: Props, state: State) => {
+  const getStoneValue = (): DisplayColor => {
+    return Stone.toDisplay(props.value);
   }
 
-  render() {
-    return (
-      <td className="square"
-          data-index={this.props.position}
-          onClick={() => this.props.onClick()}>
-        {this.getStoneValue()}
-      </td>
-    );
-  }
+  return (
+    <td className="square"
+        data-index={props.position}
+        onClick={() => props.onClick()}>
+      {getStoneValue()}
+    </td>
+  );
 }
 
 export type Squares = Color[];
