@@ -1,6 +1,11 @@
 import React from 'react';
 
-export const Pass = (props: any) => {
+type Props = {
+  possibleToPass: boolean,
+  pass: () => void
+}
+
+export const Pass = (props: Props) => {
   return (
     <div className='pass-button'>
       <button disabled={!props.possibleToPass} onClick={props.pass}>パスする</button>
