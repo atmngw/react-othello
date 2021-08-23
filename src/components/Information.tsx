@@ -7,11 +7,9 @@ type Props = {
   squares: Squares;
 }
 
-type TCount = number;
-
 export const Information: React.FC<Props> = (props: any) => {
 
-  const countColor = (color: Color): TCount => {
+  const countColor = (color: Color): number => {
     return props.squares.filter((value: Color) => value === color).length;
   }
 
