@@ -7,7 +7,7 @@ type Props = {
   squares: Squares;
 }
 
-export const Information: React.FC<Props> = (props: any) => {
+export const Information = (props: Props) => {
 
   const countColor = (color: Color): number => {
     return props.squares.filter((value: Color) => value === color).length;
