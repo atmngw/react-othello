@@ -2,17 +2,17 @@ import React from 'react';
 import {Square, TSquares} from 'components/Square';
 import {getPosition} from 'utils/Rule';
 
-interface IPos {
+type Props = {
   currently_color: number;
   squares: TSquares;
   histories: any[];
   squareClick: (position: number) => void;
 }
 
-interface IState {
+type State = {
 }
 
-class Board extends React.Component<IPos, IState> {
+class Board extends React.Component<Props, State> {
   renderSquare(position: number): any {
     const squares = this.props.squares.slice();
 

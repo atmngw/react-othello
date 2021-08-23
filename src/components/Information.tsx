@@ -2,14 +2,14 @@ import React from 'react';
 import Stone, {TColor} from 'components/Stone';
 import {TSquare, TSquares} from 'components/Square';
 
-interface IPos {
+type Props = {
   currently_color: number;
   squares: TSquares;
 }
 
 type TCount = number;
 
-const Information: React.FC<IPos> = (props: any) => {
+const Information: React.FC<Props> = (props: any) => {
 
   const countColor = (color: TColor): TCount => {
     return props.squares.filter((value: TSquare) => value === color).length;

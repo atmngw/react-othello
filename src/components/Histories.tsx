@@ -3,11 +3,11 @@ import {Square} from 'components/Square';
 import Stone, {TColor} from 'components/Stone';
 import {getPosition} from 'utils/Rule';
 
-interface IPos {
+type Props = {
   histories: any[];
 }
 
-const Histories: React.FC<IPos> = (props: any) => {
+const Histories: React.FC<Props> = (props: any) => {
   let histories_tables = []
   const histories = props.histories.slice().reverse();
 

@@ -7,13 +7,16 @@ import Histories from 'components/Histories';
 import Information from 'components/Information';
 import {TSquares} from 'components/Square';
 
-interface IState {
+type Props = {
+}
+
+type State = {
   histories: any[];
   currently_color: number;
   squares: TSquares;
 }
 
-class Game extends React.Component<{}, IState> {
+class Game extends React.Component<Props, State> {
   constructor(props: any) {
     super(props);
 

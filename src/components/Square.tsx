@@ -2,16 +2,16 @@ import React from 'react';
 import Stone, {TColor, TDisplayColor} from 'components/Stone';
 import {TPosition} from 'components/Board';
 
-interface IState {
+type State = {
 }
 
-interface IPos {
+type Props = {
   position: TPosition;
   value: TColor;
   onClick: () => void;
 }
 
-export class Square extends React.Component<IPos, IState> {
+export class Square extends React.Component<Props, State> {
   getStoneValue(): TDisplayColor {
     return Stone.toDisplay(this.props.value);
   }
