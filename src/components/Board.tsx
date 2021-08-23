@@ -1,6 +1,6 @@
 import React from "react";
 import {Square, TSquares} from "./Square";
-import {getPosition} from './Rule';
+import {getPosition} from '../Rule';
 
 interface IPos {
   currently_color: number;
