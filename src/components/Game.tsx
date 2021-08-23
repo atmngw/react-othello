@@ -2,7 +2,7 @@ import React from "react";
 import Board, {TPosition} from "./Board";
 import Stone, {TColor} from "./Stone";
 import Pass from './Pass';
-import {flip, canPut} from "../Rule";
+import {flip, canPut} from "../utils/Rule";
 import Histories from "./Histories";
 import Information from "./Information";
 import {TSquares} from './Square';
