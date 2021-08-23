@@ -1,6 +1,6 @@
-import React from "react";
-import {Square, TSquares} from "./Square";
-import {getPosition} from '../utils/Rule';
+import React from 'react';
+import {Square, TSquares} from 'components/Square';
+import {getPosition} from 'utils/Rule';
 
 interface IPos {
   currently_color: number;

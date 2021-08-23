@@ -1,6 +1,6 @@
 import React from 'react';
-import Stone, {TColor, TDisplayColor} from './Stone';
-import {TPosition} from './Board';
+import Stone, {TColor, TDisplayColor} from 'components/Stone';
+import {TPosition} from 'components/Board';
 
 interface IState {
 }

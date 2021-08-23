@@ -1,11 +1,11 @@
-import React from "react";
-import Board, {TPosition} from "./Board";
-import Stone, {TColor} from "./Stone";
-import Pass from './Pass';
-import {flip, canPut} from "../utils/Rule";
-import Histories from "./Histories";
-import Information from "./Information";
-import {TSquares} from './Square';
+import React from 'react';
+import Board, {TPosition} from 'components/Board';
+import Stone, {TColor} from 'components/Stone';
+import Pass from 'components/Pass';
+import {flip, canPut} from 'utils/Rule';
+import Histories from 'components/Histories';
+import Information from 'components/Information';
+import {TSquares} from 'components/Square';
 
 interface IState {
   histories: any[];

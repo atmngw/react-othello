@@ -1,7 +1,7 @@
-import {Square} from "./Square";
-import React from "react";
-import Stone, {TColor} from './Stone';
-import {getPosition} from '../utils/Rule';
+import React from 'react';
+import {Square} from 'components/Square';
+import Stone, {TColor} from 'components/Stone';
+import {getPosition} from 'utils/Rule';
 
 interface IPos {
   histories: any[];

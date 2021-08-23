@@ -1,6 +1,6 @@
-import React from "react";
-import Stone, {TColor} from './Stone';
-import {TSquare, TSquares} from './Square';
+import React from 'react';
+import Stone, {TColor} from 'components/Stone';
+import {TSquare, TSquares} from 'components/Square';
 
 interface IPos {
   currently_color: number;

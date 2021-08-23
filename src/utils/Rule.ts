@@ -1,6 +1,6 @@
-import {TSquares} from "../components/Square";
-import Stone, {TColor} from '../components/Stone';
-import {TPosition, TCol, TRow} from "../components/Board";
+import {TSquares} from "components/Square";
+import Stone, {TColor} from 'components/Stone';
+import {TPosition, TCol, TRow} from "components/Board";
 
 /**
  * 石の反転処理
