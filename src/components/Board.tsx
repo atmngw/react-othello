@@ -38,7 +38,7 @@ export const Board = (props: Props, state: State) => {
   return (
     <div className='board'>
       <table className="table">
-        {rows}
+        <tbody>{rows}</tbody>
       </table>
     </div>
   );
