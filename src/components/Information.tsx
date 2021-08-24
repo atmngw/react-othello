@@ -1,5 +1,5 @@
 import React from 'react';
-import {Stone, Color} from 'components/Stone';
+import {STONES, Color, toDisplay} from 'components/Stone';
 import {Squares} from 'components/Square';
 
 type Props = {
@@ -16,15 +16,15 @@ export const Information = (props: Props) => {
   return (
     <div className='information'>
       <div className='stats'>
-        <div className={`score ${props.currently_color === Stone.BLACK ? 'active' : 'inactive'}`}>
+        <div className={`score ${props.currently_color === STONES.BLACK ? 'active' : 'inactive'}`}>
           <div className='count'>
-            {Stone.toDisplay(Stone.BLACK)} &#058; {countColor(Stone.BLACK)}
+            {toDisplay(STONES.BLACK)} &#058; {countColor(STONES.BLACK)}
           </div>
         </div>
 
-        <div className={`score ${props.currently_color === Stone.WHITE ? 'active' : 'inactive'}`}>
+        <div className={`score ${props.currently_color === STONES.WHITE ? 'active' : 'inactive'}`}>
           <div className='count'>
-            {Stone.toDisplay(Stone.WHITE)} &#058; {countColor(Stone.WHITE)}
+            {toDisplay(STONES.WHITE)} &#058; {countColor(STONES.WHITE)}
           </div>
         </div>
       </div>

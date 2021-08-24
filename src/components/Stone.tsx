@@ -1,14 +1,15 @@
-export class Stone {
-  static readonly EMPTY = 0;
-  static readonly BLACK = 1;
-  static readonly WHITE = 2;
+export const STONES = {
+  EMPTY: 0,
+  BLACK: 1,
+  WHITE: 2
+} as const;
 
-  static toDisplay = (color: Color): DisplayColor => {
-    if (color === Stone.BLACK) return '●';
-    if (color === Stone.WHITE) return '◯';
-    return '';
-  }
-}
+// export type STONES = typeof STONES[keyof typeof STONES];
 
 export type Color = number;
-export type DisplayColor = string;
+
+export function toDisplay(color: Color): string {
+  if (color === STONES.BLACK) return '●';
+  if (color === STONES.WHITE) return '◯';
+  return '';
+}

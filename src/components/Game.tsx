@@ -1,6 +1,6 @@
 import React from 'react';
 import {Board, Position} from 'components/Board';
-import {Stone, Color} from 'components/Stone';
+import {STONES} from 'components/Stone';
 import {Pass} from 'components/Pass';
 import {Histories} from 'components/Histories';
 import {Information} from 'components/Information';
@@ -19,17 +19,17 @@ export class Game extends React.Component<Props, State> {
   constructor(props: any) {
     super(props);
 
-    const squares: Squares = Array(64).fill(Stone.EMPTY)
+    const squares: Squares = Array(64).fill(STONES.EMPTY)
 
     // 初期配置
-    squares[27] = Stone.WHITE
-    squares[28] = Stone.BLACK
-    squares[35] = Stone.BLACK
-    squares[36] = Stone.WHITE
+    squares[27] = STONES.WHITE
+    squares[28] = STONES.BLACK
+    squares[35] = STONES.BLACK
+    squares[36] = STONES.WHITE
 
     this.state = {
-      currently_color: Stone.BLACK,
-      histories: [{squares, color: Stone.BLACK}],
+      currently_color: STONES.BLACK,
+      histories: [{squares, color: STONES.BLACK}],
       squares: squares,
     };
   }
@@ -39,7 +39,7 @@ export class Game extends React.Component<Props, State> {
     let flipped_squares: Squares = this.state.squares.slice();
 
     // 現在石があるか
-    if (this.state.squares[position] !== Stone.EMPTY) {
+    if (this.state.squares[position] !== STONES.EMPTY) {
       return flipped_squares;
     }
 
@@ -72,15 +72,15 @@ export class Game extends React.Component<Props, State> {
   }
 
   isEmpty = (position: Position): Boolean => {
-    return this.state.squares[position] === Stone.EMPTY;
+    return this.state.squares[position] === STONES.EMPTY;
   }
 
   changeTurn = (): void => {
-    const next_color = this.state.currently_color === Stone.BLACK ? Stone.WHITE : Stone.BLACK;
+    const next_color = this.state.currently_color === STONES.BLACK ? STONES.WHITE : STONES.BLACK;
     this.setState({currently_color: next_color})
   }
 
-  getCurrentlyColor = (): Color => {
+  getCurrentlyColor = (): number => {
     return this.state.currently_color;
   }
 

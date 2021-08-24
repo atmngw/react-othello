@@ -1,6 +1,6 @@
 import React from 'react';
 import {Square} from 'components/Square';
-import {Stone, Color} from 'components/Stone';
+import {Color, toDisplay} from 'components/Stone';
 import {getPosition} from 'utils/Rule';
 
 type Props = {
@@ -29,7 +29,7 @@ export const Histories = (props: Props) => {
       const is_initial = count === 0;
 
       const title = is_initial ? '開始' : `第${count}手`;
-      const stone_color = is_initial ? '' : ' ' + Stone.toDisplay(color);
+      const stone_color = is_initial ? '' : ' ' + toDisplay(color);
 
       return title + stone_color;
     }
@@ -37,9 +37,11 @@ export const Histories = (props: Props) => {
     const count = histories.length - parseInt(idx) - 1;
 
     histories_tables.push(
-      <div className="item">
+      <div className="item" key={idx}>
         <h3>{title(count, histories[idx].color)}</h3>
-        <table className="square" key={idx}>{rows}</table>
+        <table className="square">
+          <tbody>{rows}</tbody>
+        </table>
       </div>)
   }
 

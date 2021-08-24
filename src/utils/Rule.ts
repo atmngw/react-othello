@@ -1,5 +1,5 @@
 import {Squares} from "components/Square";
-import {Stone, Color} from 'components/Stone';
+import {STONES, Color} from 'components/Stone';
 import {Position, Col, Row} from "components/Board";
 
 /**
@@ -56,7 +56,7 @@ export function flip(currently_color: Color, putPosition: Position, diff: number
     }
 
     // 空いていたら終了
-    if (after_squares[check_position] === Stone.EMPTY) {
+    if (after_squares[check_position] === STONES.EMPTY) {
       break;
     }
 
@@ -84,7 +84,7 @@ export function flip(currently_color: Color, putPosition: Position, diff: number
  */
 export function canPut(squares: Squares, currently_color: Color): boolean {
   const checkCanPut = function (value: number, position: Position): boolean {
-    if (squares[position] === Stone.EMPTY) {
+    if (squares[position] === STONES.EMPTY) {
       // 全方向への設置
       const diff_list = [-9, -8, -7, 1, 9, 8, 7, -1];
       for (let i = 0; i < diff_list.length; i++) {

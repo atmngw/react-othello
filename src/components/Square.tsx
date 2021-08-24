@@ -1,5 +1,5 @@
 import React from 'react';
-import {Stone, Color, DisplayColor} from 'components/Stone';
+import {Color, toDisplay} from 'components/Stone';
 import {Position} from 'components/Board';
 
 type State = {}
@@ -11,8 +11,8 @@ type Props = {
 }
 
 export const Square = (props: Props, state: State) => {
-  const getStoneValue = (): DisplayColor => {
-    return Stone.toDisplay(props.value);
+  const getStoneValue = (): string => {
+    return toDisplay(props.value);
   }
 
   return (
