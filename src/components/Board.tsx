@@ -9,9 +9,7 @@ type Props = {
   squareClick: (position: number) => void;
 }
 
-type State = {}
-
-export const Board = (props: Props, state: State) => {
+export const Board = (props: Props) => {
   const renderSquare = (position: number): any => {
     const squares = props.squares.slice();
 

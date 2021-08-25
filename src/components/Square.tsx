@@ -2,15 +2,13 @@ import React from 'react';
 import {Color, toDisplay} from 'components/Stone';
 import {Position} from 'components/Board';
 
-type State = {}
-
 type Props = {
   position: Position;
   value: Color;
   onClick: () => void;
 }
 
-export const Square = (props: Props, state: State) => {
+export const Square = (props: Props) => {
   const getStoneValue = (): string => {
     return toDisplay(props.value);
   }
