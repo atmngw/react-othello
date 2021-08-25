@@ -13,7 +13,7 @@ export type History = {
 };
 
 export const Histories: React.FC<Props> = ({histories}) => {
-  let histories_tables = []
+  let historiesTables = []
   histories = histories.slice().reverse();
 
   for (let idx in histories) {
@@ -31,17 +31,17 @@ export const Histories: React.FC<Props> = ({histories}) => {
     }
 
     const title = (count: number, color: Color): string => {
-      const is_initial = count === 0;
+      const isInitial = count === 0;
 
-      const title = is_initial ? '開始' : `第${count}手`;
-      const stone_color = is_initial ? '' : ' ' + toDisplay(color);
+      const title = isInitial ? '開始' : `第${count}手`;
+      const stoneColor = isInitial ? '' : ' ' + toDisplay(color);
 
-      return title + stone_color;
+      return title + stoneColor;
     }
 
     const count = histories.length - parseInt(idx) - 1;
 
-    histories_tables.push(
+    historiesTables.push(
       <div className="item" key={idx}>
         <h3>{title(count, histories[idx].color)}</h3>
         <table className="square">
@@ -54,7 +54,7 @@ export const Histories: React.FC<Props> = ({histories}) => {
     <div className="histories">
       <h2>Histories</h2>
       <div className="list">
-        {histories_tables}
+        {historiesTables}
       </div>
     </div>
   );

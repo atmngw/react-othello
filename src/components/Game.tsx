@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Board, Position} from 'components/Board';
-import {STONES} from 'utils/Stone';
+import {Color, STONES} from 'utils/Stone';
 import {Pass} from 'components/Pass';
 import {Histories, History} from 'components/Histories';
 import {Information} from 'components/Information';
@@ -9,125 +9,110 @@ import {flip, canPut} from 'utils/Rule';
 
 type Props = {}
 
-type State = {
-  histories: History[];
-  currently_color: number;
-  squares: Squares;
-}
+export const Game: React.FC<Props> = () => {
+  // 初期配置
+  const initSquares = Array(64).fill(STONES.EMPTY)
+  initSquares[27] = STONES.WHITE
+  initSquares[28] = STONES.BLACK
+  initSquares[35] = STONES.BLACK
+  initSquares[36] = STONES.WHITE
 
-export class Game extends React.Component<Props, State> {
-  constructor(props: any) {
-    super(props);
+  const [currentlyColor, setCurrentlyColor] = useState<Color>(STONES.BLACK)
+  const [squares, setSquares] = useState<Squares>(initSquares)
+  const [histories, setHistories] = useState<History[]>([{squares: initSquares, color: STONES.BLACK}])
 
-    const squares: Squares = Array(64).fill(STONES.EMPTY)
-
-    // 初期配置
-    squares[27] = STONES.WHITE
-    squares[28] = STONES.BLACK
-    squares[35] = STONES.BLACK
-    squares[36] = STONES.WHITE
-
-    this.state = {
-      currently_color: STONES.BLACK,
-      histories: [{squares, color: STONES.BLACK}],
-      squares: squares,
-    };
-  }
-
-  flipStone = (position: Position): Squares => {
+  const flipStone = (position: Position): Squares => {
     // 反転した石の設置箇所
-    let flipped_squares: Squares = this.state.squares.slice();
+    let flippedSquares: Squares = squares.slice();
 
     // 現在石があるか
-    if (this.state.squares[position] !== STONES.EMPTY) {
-      return flipped_squares;
+    if (squares[position] !== STONES.EMPTY) {
+      return flippedSquares;
     }
 
     // 設置後のボードで反転処理を行う
     // 左斜め上
-    flipped_squares = flip(this.state.currently_color, position, -9, flipped_squares);
+    flippedSquares = flip(currentlyColor, position, -9, flippedSquares);
 
     // 真上
-    flipped_squares = flip(this.state.currently_color, position, -8, flipped_squares);
+    flippedSquares = flip(currentlyColor, position, -8, flippedSquares);
 
     // 右斜上
-    flipped_squares = flip(this.state.currently_color, position, -7, flipped_squares);
+    flippedSquares = flip(currentlyColor, position, -7, flippedSquares);
 
     // 右
-    flipped_squares = flip(this.state.currently_color, position, 1, flipped_squares);
+    flippedSquares = flip(currentlyColor, position, 1, flippedSquares);
 
     // 右斜下
-    flipped_squares = flip(this.state.currently_color, position, 9, flipped_squares);
+    flippedSquares = flip(currentlyColor, position, 9, flippedSquares);
 
     // 真下
-    flipped_squares = flip(this.state.currently_color, position, 8, flipped_squares);
+    flippedSquares = flip(currentlyColor, position, 8, flippedSquares);
 
     // 左斜下
-    flipped_squares = flip(this.state.currently_color, position, 7, flipped_squares);
+    flippedSquares = flip(currentlyColor, position, 7, flippedSquares);
 
     // 左
-    flipped_squares = flip(this.state.currently_color, position, -1, flipped_squares);
+    flippedSquares = flip(currentlyColor, position, -1, flippedSquares);
 
-    return flipped_squares;
+    return flippedSquares;
   }
 
-  isEmpty = (position: Position): Boolean => {
-    return this.state.squares[position] === STONES.EMPTY;
+  const isEmpty = (position: Position): Boolean => {
+    return squares[position] === STONES.EMPTY;
   }
 
-  changeTurn = (): void => {
-    const next_color = this.state.currently_color === STONES.BLACK ? STONES.WHITE : STONES.BLACK;
-    this.setState({currently_color: next_color})
+  const changeTurn = (): void => {
+    const nextColor: number = currentlyColor === STONES.BLACK ? STONES.WHITE : STONES.BLACK;
+    setCurrentlyColor(nextColor)
   }
 
-  getCurrentlyColor = (): number => {
-    return this.state.currently_color;
+  const getCurrentlyColor = (): number => {
+    return currentlyColor;
   }
 
-  squareClick = (position: Position) => {
-    if (!this.isEmpty(position)) return;
+  const squareClick = (position: Position) => {
+    if (!isEmpty(position)) return;
 
-    let flipped_squares = this.flipStone(position);
+    let flippedSquares = flipStone(position);
 
     // 差分があればターンチェンジ
-    if (flipped_squares.toString() === this.state.squares.toString()) return;
+    if (flippedSquares.toString() === squares.toString()) return;
 
-    flipped_squares[position] = this.getCurrentlyColor();
-    this.setState({squares: flipped_squares});
-    this.setState({
-      histories: this.state.histories.concat([{
-        squares: flipped_squares,
-        color: this.getCurrentlyColor()
+    flippedSquares[position] = getCurrentlyColor();
+    setSquares(flippedSquares);
+    setHistories(
+      histories.concat([{
+        squares: flippedSquares,
+        color: getCurrentlyColor()
       }])
-    });
-
-    this.changeTurn();
-  }
-
-  possibleToPass = (): boolean => {
-    return !canPut(this.state.squares.slice(), this.state.currently_color);
-  }
-
-  render() {
-    return (
-      <div>
-        <Information
-          currently_color={this.state.currently_color}
-          squares={this.state.squares.slice()}
-        />
-
-        <Pass
-          possibleToPass={this.possibleToPass()}
-          pass={this.changeTurn}
-        />
-
-        <Board
-          squares={this.state.squares.slice()}
-          squareClick={this.squareClick}
-        />
-
-        <Histories histories={this.state.histories}/>
-      </div>
     );
+
+    changeTurn();
   }
+
+  const possibleToPass = (): boolean => {
+    return !canPut(squares.slice(), currentlyColor);
+  }
+
+  return (
+    <div>
+      <Information
+        currentlyColor={currentlyColor}
+        squares={squares.slice()}
+      />
+
+      <Pass
+        possibleToPass={possibleToPass()}
+        pass={changeTurn}
+      />
+
+      <Board
+        squares={squares.slice()}
+        squareClick={squareClick}
+      />
+
+      <Histories histories={histories}/>
+    </div>
+  );
 }
