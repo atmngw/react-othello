@@ -7,19 +7,21 @@ import {Information} from 'components/Information';
 import {Squares} from 'components/Square';
 import {flip, canPut} from 'utils/Rule';
 
+const initialSquares = (): Squares => {
+  const squares = Array(64).fill(STONES.EMPTY)
+  squares[27] = STONES.WHITE
+  squares[28] = STONES.BLACK
+  squares[35] = STONES.BLACK
+  squares[36] = STONES.WHITE
+  return squares
+}
+
 type Props = {}
 
 export const Game: React.FC<Props> = () => {
-  // 初期配置
-  const initSquares = Array(64).fill(STONES.EMPTY)
-  initSquares[27] = STONES.WHITE
-  initSquares[28] = STONES.BLACK
-  initSquares[35] = STONES.BLACK
-  initSquares[36] = STONES.WHITE
-
   const [currentlyColor, setCurrentlyColor] = useState<Color>(STONES.BLACK)
-  const [squares, setSquares] = useState<Squares>(initSquares)
-  const [histories, setHistories] = useState<History[]>([{squares: initSquares, color: STONES.BLACK}])
+  const [squares, setSquares] = useState<Squares>(initialSquares())
+  const [histories, setHistories] = useState<History[]>([{squares: initialSquares(), color: STONES.BLACK}])
 
   const flipStone = (position: Position): Squares => {
     // 反転した石の設置箇所
