@@ -1,5 +1,5 @@
 import React from 'react';
-import {Color, toDisplay} from 'components/Stone';
+import {Color, toDisplay} from 'utils/Stone';
 import {Position} from 'components/Board';
 
 type Props = {

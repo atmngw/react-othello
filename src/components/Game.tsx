@@ -1,6 +1,6 @@
 import React from 'react';
 import {Board, Position} from 'components/Board';
-import {STONES} from 'components/Stone';
+import {STONES} from 'utils/Stone';
 import {Pass} from 'components/Pass';
 import {Histories} from 'components/Histories';
 import {Information} from 'components/Information';

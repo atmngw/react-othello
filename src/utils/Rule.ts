@@ -1,5 +1,5 @@
 import {Squares} from "components/Square";
-import {STONES, Color} from 'components/Stone';
+import {STONES, Color} from 'utils/Stone';
 import {Position, Col, Row} from "components/Board";
 
 /**

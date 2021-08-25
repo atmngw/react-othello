@@ -1,6 +1,6 @@
 import React from 'react';
 import {Square} from 'components/Square';
-import {Color, toDisplay} from 'components/Stone';
+import {Color, toDisplay} from 'utils/Stone';
 import {getPosition} from 'utils/Rule';
 
 type Props = {

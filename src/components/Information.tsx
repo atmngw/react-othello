@@ -1,5 +1,5 @@
 import React from 'react';
-import {STONES, Color, toDisplay} from 'components/Stone';
+import {STONES, Color, toDisplay} from 'utils/Stone';
 import {Squares} from 'components/Square';
 
 type Props = {
