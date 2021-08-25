@@ -1,11 +1,16 @@
 import React from 'react';
-import {Square} from 'components/Square';
+import {Square, Squares} from 'components/Square';
 import {Color, toDisplay} from 'utils/Stone';
 import {getPosition} from 'utils/Rule';
 
 type Props = {
-  histories: any[];
+  histories: History[];
 }
+
+export type History = {
+  squares: Squares,
+  color: Color,
+};
 
 export const Histories: React.FC<Props> = ({histories}) => {
   let histories_tables = []

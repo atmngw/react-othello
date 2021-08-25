@@ -10,7 +10,7 @@ import {Position, Col, Row} from "components/Board";
  * @param diff
  * @param squares
  *
- * @return [] 変更後の配置または、反転不可の場合は変更前の配列を返却
+ * @return Squares 変更後の配置または、反転不可の場合は変更前の配列を返却
  */
 export function flip(currently_color: Color, putPosition: Position, diff: number, squares: Squares): Squares {
   const before_squares: Squares = squares.slice();

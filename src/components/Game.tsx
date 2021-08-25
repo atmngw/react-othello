@@ -2,7 +2,7 @@ import React from 'react';
 import {Board, Position} from 'components/Board';
 import {STONES} from 'utils/Stone';
 import {Pass} from 'components/Pass';
-import {Histories} from 'components/Histories';
+import {Histories, History} from 'components/Histories';
 import {Information} from 'components/Information';
 import {Squares} from 'components/Square';
 import {flip, canPut} from 'utils/Rule';
@@ -10,7 +10,7 @@ import {flip, canPut} from 'utils/Rule';
 type Props = {}
 
 type State = {
-  histories: any[];
+  histories: History[];
   currently_color: number;
   squares: Squares;
 }
