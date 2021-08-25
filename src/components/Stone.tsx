@@ -4,8 +4,6 @@ export const STONES = {
   WHITE: 2
 } as const;
 
-// export type STONES = typeof STONES[keyof typeof STONES];
-
 export type Color = number;
 
 export function toDisplay(color: Color): string {
