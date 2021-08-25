@@ -123,8 +123,6 @@ export class Game extends React.Component<Props, State> {
 
         <Board
           squares={this.state.squares.slice()}
-          currently_color={this.state.currently_color}
-          histories={this.state.histories}
           squareClick={this.squareClick}
         />
 

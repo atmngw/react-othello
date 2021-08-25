@@ -8,15 +8,15 @@ type Props = {
   onClick: () => void;
 }
 
-export const Square = (props: Props) => {
+export const Square: React.FC<Props> = ({position, value, onClick}) => {
   const getStoneValue = (): string => {
-    return toDisplay(props.value);
+    return toDisplay(value);
   }
 
   return (
     <td className="square"
-        data-index={props.position}
-        onClick={() => props.onClick()}>
+        data-index={position}
+        onClick={() => onClick()}>
       {getStoneValue()}
     </td>
   );

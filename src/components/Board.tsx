@@ -3,22 +3,20 @@ import {Square, Squares} from 'components/Square';
 import {getPosition} from 'utils/Rule';
 
 type Props = {
-  currently_color: number;
   squares: Squares;
-  histories: any[];
   squareClick: (position: number) => void;
 }
 
-export const Board = (props: Props) => {
+export const Board: React.FC<Props> = ({squares, squareClick}) => {
   const renderSquare = (position: number): any => {
-    const squares = props.squares.slice();
+    squares = squares.slice();
 
     return (
       <Square
         key={position}
         position={position}
         value={squares[position]}
-        onClick={() => props.squareClick(position)}/>
+        onClick={() => squareClick(position)}/>
     );
   }
 

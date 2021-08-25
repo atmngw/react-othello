@@ -7,22 +7,22 @@ type Props = {
   squares: Squares;
 }
 
-export const Information = (props: Props) => {
+export const Information: React.FC<Props> = ({currently_color, squares}) => {
 
   const countColor = (color: Color): number => {
-    return props.squares.filter((value: Color) => value === color).length;
+    return squares.filter((value: Color) => value === color).length;
   }
 
   return (
     <div className='information'>
       <div className='stats'>
-        <div className={`score ${props.currently_color === STONES.BLACK ? 'active' : 'inactive'}`}>
+        <div className={`score ${currently_color === STONES.BLACK ? 'active' : 'inactive'}`}>
           <div className='count'>
             {toDisplay(STONES.BLACK)} &#058; {countColor(STONES.BLACK)}
           </div>
         </div>
 
-        <div className={`score ${props.currently_color === STONES.WHITE ? 'active' : 'inactive'}`}>
+        <div className={`score ${currently_color === STONES.WHITE ? 'active' : 'inactive'}`}>
           <div className='count'>
             {toDisplay(STONES.WHITE)} &#058; {countColor(STONES.WHITE)}
           </div>
