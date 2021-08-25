@@ -69,10 +69,6 @@ export const Game: React.FC<Props> = () => {
     setCurrentlyColor(nextColor)
   }
 
-  const getCurrentlyColor = (): number => {
-    return currentlyColor;
-  }
-
   const squareClick = (position: Position) => {
     if (!isEmpty(position)) return;
 
@@ -81,12 +77,12 @@ export const Game: React.FC<Props> = () => {
     // 差分があればターンチェンジ
     if (flippedSquares.toString() === squares.toString()) return;
 
-    flippedSquares[position] = getCurrentlyColor();
+    flippedSquares[position] = currentlyColor;
     setSquares(flippedSquares);
     setHistories(
       histories.concat([{
         squares: flippedSquares,
-        color: getCurrentlyColor()
+        color: currentlyColor
       }])
     );
 
