@@ -98,6 +98,11 @@
     border: red;
 }
 
+.game-end {
+    color: gold;
+    font-size: 40px;
+}
+
 .pass-button {
     margin: 20px 0 30px
 }
