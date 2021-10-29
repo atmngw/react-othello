@@ -2,6 +2,25 @@ import {Squares} from "components/Square";
 import {STONES, Color} from 'utils/Stone';
 import {Position, Col, Row} from "components/Board";
 
+let flippedCache: { [key: string]: Squares } = {}
+
+/**
+ * flipの実行結果を返す
+ *
+ * @param currentlyColor
+ * @param putPosition
+ * @param diff
+ * @param squares
+ */
+export const memorizedFlip = (currentlyColor: Color, putPosition: Position, diff: number, squares: Squares) => {
+  const key = currentlyColor + ':' + putPosition + ':' + diff + ':' + squares.join('')
+
+  if (!flippedCache[key]) {
+    flippedCache[key] = flip(currentlyColor, putPosition, diff, squares)
+  }
+  return flippedCache[key];
+}
+
 /**
  * 石の反転処理
  *
@@ -12,7 +31,7 @@ import {Position, Col, Row} from "components/Board";
  *
  * @return Squares 変更後の配置または、反転不可の場合は変更前の配列を返却
  */
-export function flip(currentlyColor: Color, putPosition: Position, diff: number, squares: Squares): Squares {
+const flip = (currentlyColor: Color, putPosition: Position, diff: number, squares: Squares): Squares => {
   const beforeSquares: Squares = squares.slice();
   let afterSquares: Squares = squares.slice();
   let flippedCount = 0;
@@ -77,7 +96,7 @@ export function flip(currentlyColor: Color, putPosition: Position, diff: number,
 }
 
 /**
- * 配置可能か検査
+ * 未配置のマスに配置可能か検査
  * @param squares
  * @param currentlyColor
  * @return boolean
@@ -89,7 +108,7 @@ export function canPut(squares: Squares, currentlyColor: Color): boolean {
       const diffList = [-9, -8, -7, 1, 9, 8, 7, -1];
       for (let i = 0; i < diffList.length; i++) {
         const diff = diffList[i];
-        const flippedSquares: Squares = flip(currentlyColor, position, diff, squares);
+        const flippedSquares: Squares = memorizedFlip(currentlyColor, position, diff, squares);
         if (flippedSquares.toString() !== squares.toString()) {
           return true;
         }
