@@ -127,7 +127,6 @@ export const Game: React.FC = () => {
 
       <Information
         currentlyColor={currentlyColor}
-        squares={squares.slice()}
         isFinished={isFinished()}
         countColors={countColors(squares)}
       />

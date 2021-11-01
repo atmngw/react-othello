@@ -1,27 +1,22 @@
 import React from 'react';
 import {STONES, toDisplay} from 'utils/Stone';
-import {Squares} from 'components/Square';
 
-type Props = {
-  currentlyColor: number;
-  squares: Squares;
-  isFinished: boolean;
+type GameResultProps = {
   countColors: { [key: number]: number };
+  isFinished: boolean;
 }
 
-export const Information: React.FC<Props> = ({currentlyColor, squares, isFinished, countColors}) => {
-  const black_state = !isFinished && currentlyColor === STONES.BLACK ? 'active' : 'inactive'
-  const class_white = !isFinished && currentlyColor === STONES.WHITE ? 'active' : 'inactive'
+/**
+ * 勝敗の表示
+ * @constructor
+ */
+const GameResult: React.FC<GameResultProps> = ({countColors, isFinished}) => {
+  const blackCount = countColors[STONES.BLACK]
+  const whiteCount = countColors[STONES.WHITE]
 
-  /**
-   * 勝敗の表示
-   * @constructor
-   */
-  const GameResult: React.FC<{}> = () => {
-    const blackCount = countColors[STONES.BLACK]
-    const whiteCount = countColors[STONES.WHITE]
+  let tag = null;
 
-    let tag;
+  if (isFinished) {
     if (blackCount === whiteCount) {
       tag = <div className={'game-end'}>引き分け</div>
     } else if (blackCount > whiteCount) {
@@ -29,21 +24,30 @@ export const Information: React.FC<Props> = ({currentlyColor, squares, isFinishe
     } else {
       tag = <div className={'game-end'}>WHITEの勝ち</div>
     }
-
-    return (
-      tag
-    );
   }
 
-  let gameResult = null
-  if (isFinished) {
-    gameResult = <GameResult />
-  }
+  return (
+    tag
+  );
+}
+
+type InformationProps = {
+  currentlyColor: number;
+  isFinished: boolean;
+  countColors: { [key: number]: number };
+}
+
+export const Information: React.FC<InformationProps> = ({currentlyColor, isFinished, countColors}) => {
+  const black_state = !isFinished && currentlyColor === STONES.BLACK ? 'active' : 'inactive'
+  const class_white = !isFinished && currentlyColor === STONES.WHITE ? 'active' : 'inactive'
 
   return (
     <div className='information'>
 
-      {gameResult}
+      <GameResult
+        countColors={countColors}
+        isFinished={isFinished}
+      />
 
       <div className='stats'>
         <div className={`score ${black_state}`}>
