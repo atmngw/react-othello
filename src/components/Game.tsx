@@ -68,7 +68,7 @@ export const Game: React.FC = () => {
   }
 
   const changeTurn = (): void => {
-    setCurrentlyColor(getNetxtColor)
+    setCurrentlyColor(getNetxtColor())
   }
 
   const squareClick = (position: Position) => {
@@ -91,10 +91,6 @@ export const Game: React.FC = () => {
     changeTurn();
   }
 
-  const possibleToPass = (): boolean => {
-    return !canPut(squares.slice(), currentlyColor);
-  }
-
   /**
    * 全てのマスに石を置いた
    */
@@ -102,11 +98,24 @@ export const Game: React.FC = () => {
     return squares.filter((color: Color) => STONES.EMPTY === color).length === 0;
   }
 
-  const isFinished = (): boolean => {
-    // 次手の石が設置可能か検証
-    const canPutNextColor: boolean = !canPut(squares.slice(), currentlyColor);
+  /**
+   * どちらかの石が設置可能である
+   */
+  const canPutEither = (): boolean => {
+    let current_squares: Squares = squares.slice();
 
-    return isPutAll() || ( possibleToPass() && canPutNextColor);
+    // 次の石が設置可能か
+    const canPutNextColor: boolean = canPut(current_squares, getNetxtColor());
+
+    return canPut(current_squares, currentlyColor) || canPutNextColor
+  }
+
+  /**
+   * ゲーム終了判定
+   */
+  const isFinished = (): boolean => {
+    // 全てのマスが埋まった or どちらも設置不可の場合
+    return isPutAll() || !canPutEither();
   }
 
   useEffect(() => {
@@ -124,7 +133,7 @@ export const Game: React.FC = () => {
       />
 
       <Pass
-        possibleToPass={possibleToPass() && !isFinished()}
+        possibleToPass={!canPut(squares.slice(), currentlyColor) && !isFinished()}
         pass={changeTurn}
       />
 
