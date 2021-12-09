@@ -1,14 +1,15 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Board, Position} from 'components/Board';
 import {Color, STONES} from 'utils/Stone';
 import {Pass} from 'components/Pass';
 import {Histories, History} from 'components/Histories';
 import {Information} from 'components/Information';
-import {Squares} from 'components/Square';
-import {flip, canPut} from 'utils/Rule';
+import {countColors, Squares} from 'components/Square';
+import {memorizedFlip, canPut} from 'utils/Rule';
 
 const initialSquares = (): Squares => {
   const squares = Array(64).fill(STONES.EMPTY)
+
   squares[27] = STONES.WHITE
   squares[28] = STONES.BLACK
   squares[35] = STONES.BLACK
@@ -32,28 +33,28 @@ export const Game: React.FC = () => {
 
     // 設置後のボードで反転処理を行う
     // 左斜め上
-    flippedSquares = flip(currentlyColor, position, -9, flippedSquares);
+    flippedSquares = memorizedFlip(currentlyColor, position, -9, flippedSquares);
 
     // 真上
-    flippedSquares = flip(currentlyColor, position, -8, flippedSquares);
+    flippedSquares = memorizedFlip(currentlyColor, position, -8, flippedSquares);
 
     // 右斜上
-    flippedSquares = flip(currentlyColor, position, -7, flippedSquares);
+    flippedSquares = memorizedFlip(currentlyColor, position, -7, flippedSquares);
 
     // 右
-    flippedSquares = flip(currentlyColor, position, 1, flippedSquares);
+    flippedSquares = memorizedFlip(currentlyColor, position, 1, flippedSquares);
 
     // 右斜下
-    flippedSquares = flip(currentlyColor, position, 9, flippedSquares);
+    flippedSquares = memorizedFlip(currentlyColor, position, 9, flippedSquares);
 
     // 真下
-    flippedSquares = flip(currentlyColor, position, 8, flippedSquares);
+    flippedSquares = memorizedFlip(currentlyColor, position, 8, flippedSquares);
 
     // 左斜下
-    flippedSquares = flip(currentlyColor, position, 7, flippedSquares);
+    flippedSquares = memorizedFlip(currentlyColor, position, 7, flippedSquares);
 
     // 左
-    flippedSquares = flip(currentlyColor, position, -1, flippedSquares);
+    flippedSquares = memorizedFlip(currentlyColor, position, -1, flippedSquares);
 
     return flippedSquares;
   }
@@ -62,9 +63,12 @@ export const Game: React.FC = () => {
     return squares[position] === STONES.EMPTY;
   }
 
+  const getNetxtColor = (): Color => {
+    return currentlyColor === STONES.BLACK ? STONES.WHITE : STONES.BLACK;
+  }
+
   const changeTurn = (): void => {
-    const nextColor: number = currentlyColor === STONES.BLACK ? STONES.WHITE : STONES.BLACK;
-    setCurrentlyColor(nextColor)
+    setCurrentlyColor(getNetxtColor())
   }
 
   const squareClick = (position: Position) => {
@@ -87,19 +91,48 @@ export const Game: React.FC = () => {
     changeTurn();
   }
 
-  const possibleToPass = (): boolean => {
-    return !canPut(squares.slice(), currentlyColor);
+  /**
+   * 全てのマスに石を置いた
+   */
+  const isPutAll = (): boolean => {
+    return squares.filter((color: Color) => STONES.EMPTY === color).length === 0;
   }
+
+  /**
+   * どちらかの石が設置可能である
+   */
+  const canPutEither = (): boolean => {
+    let current_squares: Squares = squares.slice();
+
+    // 次の石が設置可能か
+    const canPutNextColor: boolean = canPut(current_squares, getNetxtColor());
+
+    return canPut(current_squares, currentlyColor) || canPutNextColor
+  }
+
+  /**
+   * ゲーム終了判定
+   */
+  const isFinished = (): boolean => {
+    // 全てのマスが埋まった or どちらも設置不可の場合
+    return isPutAll() || !canPutEither();
+  }
+
+  useEffect(() => {
+    if (isFinished()) alert('Finished')
+  })
 
   return (
     <div>
+
       <Information
         currentlyColor={currentlyColor}
-        squares={squares.slice()}
+        isFinished={isFinished()}
+        countColors={countColors(squares)}
       />
 
       <Pass
-        possibleToPass={possibleToPass()}
+        possibleToPass={!canPut(squares.slice(), currentlyColor) && !isFinished()}
         pass={changeTurn}
       />
 
