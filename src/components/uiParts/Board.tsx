@@ -1,7 +1,7 @@
 import React from 'react';
 import {Square} from 'components/Square';
-import {Squares} from 'components/Squares';
-import {getPosition} from 'utils/Rule';
+import {getPosition, Squares} from 'components/Squares';
+import {Color} from "utils/Constants";
 
 type Props = {
   squares: Squares;
@@ -10,13 +10,12 @@ type Props = {
 
 export const Board: React.FC<Props> = ({squares, squareClick}) => {
   const renderSquare = (position: number): any => {
-    squares = squares.slice();
 
     return (
       <Square
         key={position}
         position={position}
-        value={squares[position]}
+        value={squares.getStone(position)}
         onClick={() => squareClick(position)}/>
     );
   }
@@ -24,7 +23,7 @@ export const Board: React.FC<Props> = ({squares, squareClick}) => {
   const makeTable = (): JSX.Element[] => {
     let rows = []
     for (let row = 1; row <= 8; row++) {
-      let cols: Squares = []
+      let cols: Color[] = []
       for (let col = 1; col <= 8; col++) {
         const position = getPosition(row, col);
         cols.push(renderSquare(position))

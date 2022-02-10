@@ -1,8 +1,8 @@
 import React from 'react';
 import {Square} from 'components/Square';
-import {Squares} from 'components/Squares';
-import {Color, toDisplay} from 'utils/Stone';
-import {getPosition} from 'utils/Rule';
+import {Squares, getPosition} from 'components/Squares';
+import {toDisplay} from 'utils/Stone';
+import {Color} from "utils/Constants";
 
 export type History = {
   squares: Squares,
@@ -26,7 +26,7 @@ export const Histories: React.FC<Props> = ({histories}) => {
         for (let col = 1; col <= 8; col++) {
           const position = getPosition(row, col);
           cols.push(
-            <Square key={position} position={position} value={histories[idx].squares[position]} onClick={() => null}/>
+            <Square key={position} position={position} value={histories[idx].squares.getStone(position)} onClick={() => null}/>
           )
         }
 
