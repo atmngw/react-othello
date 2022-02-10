@@ -6,7 +6,7 @@ import {Histories, History} from 'components/uiParts/Histories';
 import {Information} from 'components/uiParts/Information';
 import {countColors} from 'components/Square';
 import {Squares} from 'components/Squares';
-import {memorizedFlip, canPut} from 'utils/Rule';
+import {canPut, putStone} from 'utils/Rule';
 
 const initialSquares = (): Squares => {
   const squares = Array(64).fill(STONES.EMPTY)
@@ -23,43 +23,6 @@ export const Game: React.FC = () => {
   const [squares, setSquares] = useState<Squares>(initialSquares())
   const [histories, setHistories] = useState<History[]>([{squares: initialSquares(), color: STONES.BLACK}])
 
-  const flipStone = (position: Position): Squares => {
-    // 反転した石の設置箇所
-    let flippedSquares: Squares = squares.slice();
-
-    // 現在石があるか
-    if (squares[position] !== STONES.EMPTY) {
-      return flippedSquares;
-    }
-
-    // 設置後のボードで反転処理を行う
-    // 左斜め上
-    flippedSquares = memorizedFlip(currentlyColor, position, -9, flippedSquares);
-
-    // 真上
-    flippedSquares = memorizedFlip(currentlyColor, position, -8, flippedSquares);
-
-    // 右斜上
-    flippedSquares = memorizedFlip(currentlyColor, position, -7, flippedSquares);
-
-    // 右
-    flippedSquares = memorizedFlip(currentlyColor, position, 1, flippedSquares);
-
-    // 右斜下
-    flippedSquares = memorizedFlip(currentlyColor, position, 9, flippedSquares);
-
-    // 真下
-    flippedSquares = memorizedFlip(currentlyColor, position, 8, flippedSquares);
-
-    // 左斜下
-    flippedSquares = memorizedFlip(currentlyColor, position, 7, flippedSquares);
-
-    // 左
-    flippedSquares = memorizedFlip(currentlyColor, position, -1, flippedSquares);
-
-    return flippedSquares;
-  }
-
   const isEmpty = (position: Position): Boolean => {
     return squares[position] === STONES.EMPTY;
   }
@@ -75,7 +38,7 @@ export const Game: React.FC = () => {
   const squareClick = (position: Position) => {
     if (!isEmpty(position)) return;
 
-    let flippedSquares = flipStone(position);
+    let flippedSquares = putStone(position, currentlyColor, squares.slice());
 
     // 差分があればターンチェンジ
     if (flippedSquares.toString() === squares.toString()) return;

@@ -23,6 +23,7 @@ export const Square: React.FC<Props> = ({position, value, onClick}) => {
   );
 }
 
+// TODO: Rule系に移設したい
 export const countColors = (squares: Squares): {[key: number]: number } => {
   const result: {[key:number]: number} = {}
 

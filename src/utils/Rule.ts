@@ -12,7 +12,7 @@ let flippedCache: { [key: string]: Squares } = {}
  * @param diff
  * @param squares
  */
-export const memorizedFlip = (currentlyColor: Color, putPosition: Position, diff: number, squares: Squares) => {
+const memorizedFlip = (currentlyColor: Color, putPosition: Position, diff: number, squares: Squares) => {
   const key = currentlyColor + ':' + putPosition + ':' + diff + ':' + squares.join('')
 
   if (!flippedCache[key]) {
@@ -93,6 +93,50 @@ const flip = (currentlyColor: Color, putPosition: Position, diff: number, square
   }
 
   return beforeSquares;
+}
+
+/**
+ * 石の配置
+ *
+ * @param putPosition
+ * @param currentlyColor
+ * @param squares
+ */
+export const putStone = (putPosition: Position, currentlyColor: Color, squares: Squares): Squares => {
+  // 現在石があるか
+  if (squares[putPosition] !== STONES.EMPTY) {
+    return squares;
+  }
+
+  // 反転した石の設置箇所
+  let flippedSquares: Squares = squares.slice();
+
+  // 設置後のボードで反転処理を行う
+  // 左斜め上
+  flippedSquares = memorizedFlip(currentlyColor, putPosition, -9, flippedSquares);
+
+  // 真上
+  flippedSquares = memorizedFlip(currentlyColor, putPosition, -8, flippedSquares);
+
+  // 右斜上
+  flippedSquares = memorizedFlip(currentlyColor, putPosition, -7, flippedSquares);
+
+  // 右
+  flippedSquares = memorizedFlip(currentlyColor, putPosition, 1, flippedSquares);
+
+  // 右斜下
+  flippedSquares = memorizedFlip(currentlyColor, putPosition, 9, flippedSquares);
+
+  // 真下
+  flippedSquares = memorizedFlip(currentlyColor, putPosition, 8, flippedSquares);
+
+  // 左斜下
+  flippedSquares = memorizedFlip(currentlyColor, putPosition, 7, flippedSquares);
+
+  // 左
+  flippedSquares = memorizedFlip(currentlyColor, putPosition, -1, flippedSquares);
+
+  return flippedSquares;
 }
 
 /**
