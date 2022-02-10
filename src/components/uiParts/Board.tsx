@@ -24,7 +24,7 @@ export const Board: React.FC<Props> = ({squares, squareClick}) => {
   const makeTable = (): JSX.Element[] => {
     let rows = []
     for (let row = 1; row <= 8; row++) {
-      let cols = []
+      let cols: Squares = []
       for (let col = 1; col <= 8; col++) {
         const position = getPosition(row, col);
         cols.push(renderSquare(position))
