@@ -21,21 +21,24 @@ export const Board: React.FC<Props> = ({squares, squareClick}) => {
     );
   }
 
-  let rows = []
-  for (let row = 1; row <= 8; row++) {
-    let cols = []
-    for (let col = 1; col <= 8; col++) {
-      const position = getPosition(row, col);
-      cols.push(renderSquare(position))
-    }
+  const makeTable = (): JSX.Element[] => {
+    let rows = []
+    for (let row = 1; row <= 8; row++) {
+      let cols = []
+      for (let col = 1; col <= 8; col++) {
+        const position = getPosition(row, col);
+        cols.push(renderSquare(position))
+      }
 
-    rows.push(<tr className="line" key={row} data-row={row}>{cols}</tr>)
+      rows.push(<tr className="line" key={row} data-row={row}>{cols}</tr>)
+    }
+    return rows
   }
 
   return (
     <div className='board'>
       <table className="table">
-        <tbody>{rows}</tbody>
+        <tbody>{makeTable()}</tbody>
       </table>
     </div>
   );
