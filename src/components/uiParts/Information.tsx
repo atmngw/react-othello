@@ -1,6 +1,6 @@
 import React from 'react';
 import {STONES, toDisplay} from 'utils/Stone';
-import {GameResult} from "./GameResult";
+import {GameResult} from "./Information/GameResult";
 
 type InformationProps = {
   currentlyColor: number;

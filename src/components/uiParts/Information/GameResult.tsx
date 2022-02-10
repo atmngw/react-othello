@@ -1,5 +1,5 @@
 import React from "react";
-import {STONES} from "../../utils/Stone";
+import {STONES} from "../../../utils/Stone";
 
 type GameResultProps = {
   countColors: { [key: number]: number };
