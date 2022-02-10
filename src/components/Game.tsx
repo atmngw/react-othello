@@ -27,12 +27,12 @@ export const Game: React.FC = () => {
     return squares[position] === STONES.EMPTY;
   }
 
-  const getNetxtColor = (): Color => {
+  const getNextColor = (): Color => {
     return currentlyColor === STONES.BLACK ? STONES.WHITE : STONES.BLACK;
   }
 
   const changeTurn = (): void => {
-    setCurrentlyColor(getNetxtColor())
+    setCurrentlyColor(getNextColor())
   }
 
   const squareClick = (position: Position) => {
@@ -69,7 +69,7 @@ export const Game: React.FC = () => {
     let current_squares: Squares = squares.slice();
 
     // 次の石が設置可能か
-    const canPutNextColor: boolean = canPut(current_squares, getNetxtColor());
+    const canPutNextColor: boolean = canPut(current_squares, getNextColor());
 
     return canPut(current_squares, currentlyColor) || canPutNextColor
   }
