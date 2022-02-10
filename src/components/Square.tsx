@@ -1,6 +1,7 @@
 import React from 'react';
-import {Color, STONES, toDisplay} from 'utils/Stone';
-import {Position} from 'components/Board';
+import {toDisplay} from 'utils/Stone';
+import {Color} from "../utils/Constants";
+import {Position} from 'components/uiParts/Board';
 
 type Props = {
   position: Position;
@@ -20,14 +21,4 @@ export const Square: React.FC<Props> = ({position, value, onClick}) => {
       {getStoneValue()}
     </td>
   );
-}
-
-export type Squares = Color[];
-
-export const countColors = (squares: Squares): {[key: number]: number } => {
-  const result: {[key:number]: number} = {}
-
-  result[STONES.BLACK] = squares.filter((color: Color) => STONES.BLACK === color).length
-  result[STONES.WHITE] = squares.filter((color: Color) => STONES.WHITE === color).length
-  return result
 }

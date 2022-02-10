@@ -1,8 +1,9 @@
-import {Squares} from "components/Square";
-import {STONES, Color} from 'utils/Stone';
-import {Position, Col, Row} from "components/Board";
+import {STONES} from 'utils/Stone';
+import {Color} from "./Constants";
+import {Position} from "components/uiParts/Board";
+import {Squares} from "../components/Squares";
 
-let flippedCache: { [key: string]: Squares } = {}
+let flippedCache: { [key: string]: Color[] } = {}
 
 /**
  * flipの実行結果を返す
@@ -12,7 +13,7 @@ let flippedCache: { [key: string]: Squares } = {}
  * @param diff
  * @param squares
  */
-export const memorizedFlip = (currentlyColor: Color, putPosition: Position, diff: number, squares: Squares) => {
+export const memorizedFlip = (currentlyColor: Color, putPosition: Position, diff: number, squares: Color[]) => {
   const key = currentlyColor + ':' + putPosition + ':' + diff + ':' + squares.join('')
 
   if (!flippedCache[key]) {
@@ -29,11 +30,11 @@ export const memorizedFlip = (currentlyColor: Color, putPosition: Position, diff
  * @param diff
  * @param squares
  *
- * @return Squares 変更後の配置または、反転不可の場合は変更前の配列を返却
+ * @return Color[] 変更後の配置または、反転不可の場合は変更前の配列を返却
  */
-const flip = (currentlyColor: Color, putPosition: Position, diff: number, squares: Squares): Squares => {
-  const beforeSquares: Squares = squares.slice();
-  let afterSquares: Squares = squares.slice();
+const flip = (currentlyColor: Color, putPosition: Position, diff: number, squares: Color[]): Color[] => {
+  const beforeSquares: Color[] = squares.slice();
+  let afterSquares: Color[] = squares.slice();
   let flippedCount = 0;
 
 
@@ -96,38 +97,45 @@ const flip = (currentlyColor: Color, putPosition: Position, diff: number, square
 }
 
 /**
- * 未配置のマスに配置可能か検査
- * @param squares
+ * 石の配置
+ *
+ * @param putPosition
  * @param currentlyColor
- * @return boolean
+ * @param squares
  */
-export function canPut(squares: Squares, currentlyColor: Color): boolean {
-  const checkCanPut = function (value: number, position: Position): boolean {
-    if (squares[position] === STONES.EMPTY) {
-      // 全方向への設置
-      const diffList = [-9, -8, -7, 1, 9, 8, 7, -1];
-      for (let i = 0; i < diffList.length; i++) {
-        const diff = diffList[i];
-        const flippedSquares: Squares = memorizedFlip(currentlyColor, position, diff, squares);
-        if (flippedSquares.toString() !== squares.toString()) {
-          return true;
-        }
-      }
-    }
-
-    return false;
+export const putStone = (putPosition: Position, currentlyColor: Color, squares: Squares): Squares => {
+  // 現在石があるか
+  if (squares.getStone(putPosition) !== STONES.EMPTY) {
+    return squares;
   }
 
-  return squares.some(checkCanPut);
-}
+  // 反転した石の設置箇所
+  let flippedSquares: Color[] = squares.values();
 
-/**
- * 盤面の位置番号を取得
- *
- * @param row
- * @param col
- */
-export function getPosition(row: Row, col: Col): Position {
-  // 0から63までの位置を算出
-  return (row - 1) * 8 + col - 1;
+  // 設置後のボードで反転処理を行う
+  // 左斜め上
+  flippedSquares = memorizedFlip(currentlyColor, putPosition, -9, flippedSquares);
+
+  // 真上
+  flippedSquares = memorizedFlip(currentlyColor, putPosition, -8, flippedSquares);
+
+  // 右斜上
+  flippedSquares = memorizedFlip(currentlyColor, putPosition, -7, flippedSquares);
+
+  // 右
+  flippedSquares = memorizedFlip(currentlyColor, putPosition, 1, flippedSquares);
+
+  // 右斜下
+  flippedSquares = memorizedFlip(currentlyColor, putPosition, 9, flippedSquares);
+
+  // 真下
+  flippedSquares = memorizedFlip(currentlyColor, putPosition, 8, flippedSquares);
+
+  // 左斜下
+  flippedSquares = memorizedFlip(currentlyColor, putPosition, 7, flippedSquares);
+
+  // 左
+  flippedSquares = memorizedFlip(currentlyColor, putPosition, -1, flippedSquares);
+
+  return new Squares(flippedSquares.slice());
 }
