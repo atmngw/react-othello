@@ -4,7 +4,8 @@ import {Color, STONES} from 'utils/Stone';
 import {Pass} from 'components/Pass';
 import {Histories, History} from 'components/Histories';
 import {Information} from 'components/Information';
-import {countColors, Squares} from 'components/Square';
+import {countColors} from 'components/Square';
+import {Squares} from 'components/Squares';
 import {memorizedFlip, canPut} from 'utils/Rule';
 
 const initialSquares = (): Squares => {

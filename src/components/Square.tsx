@@ -1,5 +1,6 @@
 import React from 'react';
 import {Color, STONES, toDisplay} from 'utils/Stone';
+import {Squares} from 'components/Squares';
 import {Position} from 'components/Board';
 
 type Props = {
@@ -21,8 +22,6 @@ export const Square: React.FC<Props> = ({position, value, onClick}) => {
     </td>
   );
 }
-
-export type Squares = Color[];
 
 export const countColors = (squares: Squares): {[key: number]: number } => {
   const result: {[key:number]: number} = {}

@@ -1,5 +1,6 @@
 import React from 'react';
-import {Square, Squares} from 'components/Square';
+import {Square} from 'components/Square';
+import {Squares} from 'components/Squares';
 import {Color, toDisplay} from 'utils/Stone';
 import {getPosition} from 'utils/Rule';
 
