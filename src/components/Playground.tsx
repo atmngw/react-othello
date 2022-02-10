@@ -18,7 +18,7 @@ const initialSquares = (): Squares => {
   return squares
 }
 
-export const Game: React.FC = () => {
+export const Playground: React.FC = () => {
   const [currentlyColor, setCurrentlyColor] = useState<Color>(STONES.BLACK)
   const [squares, setSquares] = useState<Squares>(initialSquares())
   const [histories, setHistories] = useState<History[]>([{squares: initialSquares(), color: STONES.BLACK}])
