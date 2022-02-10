@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import {Board, Position} from 'components/Board';
+import {Board, Position} from 'components/uiParts/Board';
 import {Color, STONES} from 'utils/Stone';
-import {Pass} from 'components/Pass';
-import {Histories, History} from 'components/Histories';
-import {Information} from 'components/Information';
+import {Pass} from 'components/uiParts/Pass';
+import {Histories, History} from 'components/uiParts/Histories';
+import {Information} from 'components/uiParts/Information';
 import {countColors} from 'components/Square';
 import {Squares} from 'components/Squares';
 import {memorizedFlip, canPut} from 'utils/Rule';

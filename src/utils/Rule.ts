@@ -1,6 +1,6 @@
 import {Squares} from 'components/Squares';
 import {STONES, Color} from 'utils/Stone';
-import {Position, Col, Row} from "components/Board";
+import {Position, Col, Row} from "components/uiParts/Board";
 
 let flippedCache: { [key: string]: Squares } = {}
 

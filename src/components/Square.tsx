@@ -1,7 +1,7 @@
 import React from 'react';
 import {Color, STONES, toDisplay} from 'utils/Stone';
 import {Squares} from 'components/Squares';
-import {Position} from 'components/Board';
+import {Position} from 'components/uiParts/Board';
 
 type Props = {
   position: Position;
